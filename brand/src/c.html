@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="font.css">
+<link rel="stylesheet" href="base.css">
+<style>
+  .mark {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+  }
+  .mark svg { width: 1024px; height: 1024px; display: block; }
+  .corner {
+    position: absolute;
+    z-index: 2;
+    font-weight: 700;
+    font-size: 96px;
+    letter-spacing: -0.03em;
+    color: #F7F7F8;
+  }
+  /* kept inside the circle-crop safe area used by most platforms */
+  .tl { top: 150px; left: 176px; }
+  .br { bottom: 150px; right: 176px; }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="glow"></div>
+    <div class="mark">
+      <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#7E96FF"/>
+            <stop offset="52%" stop-color="#4C6FFF"/>
+            <stop offset="100%" stop-color="#2D42B4"/>
+          </linearGradient>
+        </defs>
+        <g fill="url(#g)">
+          <rect x="480" y="222" width="64" height="580" rx="10" transform="rotate(45 512 512)"/>
+          <rect x="480" y="222" width="64" height="580" rx="10" transform="rotate(-45 512 512)"/>
+        </g>
+      </svg>
+    </div>
+    <div class="corner tl">WSN</div>
+    <div class="corner br">FHP</div>
+    <div class="grain"></div>
+  </div>
+</body>
+</html>

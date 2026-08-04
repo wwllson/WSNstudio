@@ -1,0 +1,621 @@
+/* ============================================================
+   WSN × FHP — Landing page
+   Design tokens (single source of truth)
+   ============================================================ */
+:root {
+  /* Accent — swap this one value to re-theme (blue / purple / cyan) */
+  --accent: #4C6FFF;
+  --accent-tint: rgba(76, 111, 255, 0.05);
+  --accent-tint-strong: rgba(76, 111, 255, 0.06);
+  --accent-border: rgba(76, 111, 255, 0.40);
+  --glow-hero: radial-gradient(circle, rgba(76, 111, 255, 0.22) 0%, transparent 68%);
+  --glow-side: radial-gradient(circle, rgba(76, 111, 255, 0.16) 0%, transparent 68%);
+  --selection: rgba(76, 111, 255, 0.35);
+
+  /* Surface */
+  --bg: #000000;
+  --text: #F5F5F5;
+
+  /* Glass */
+  --card-bg: rgba(255, 255, 255, 0.035);
+  --card-border: rgba(255, 255, 255, 0.09);
+  --input-bg: rgba(0, 0, 0, 0.35);
+
+  /* Type */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+
+  /* Layout */
+  --container: 1240px;
+  --pad-x: 6vw;
+}
+
+/* Alternate accents — add data-accent="purple" / "cyan" on <html> to switch */
+:root[data-accent="purple"] {
+  --accent: #A78BFA;
+  --accent-tint: rgba(167, 139, 250, 0.05);
+  --accent-tint-strong: rgba(167, 139, 250, 0.06);
+  --accent-border: rgba(167, 139, 250, 0.40);
+  --glow-hero: radial-gradient(circle, rgba(167, 139, 250, 0.22) 0%, transparent 68%);
+  --glow-side: radial-gradient(circle, rgba(167, 139, 250, 0.16) 0%, transparent 68%);
+  --selection: rgba(167, 139, 250, 0.35);
+}
+:root[data-accent="cyan"] {
+  --accent: #5EEAD4;
+  --accent-tint: rgba(94, 234, 212, 0.05);
+  --accent-tint-strong: rgba(94, 234, 212, 0.06);
+  --accent-border: rgba(94, 234, 212, 0.40);
+  --glow-hero: radial-gradient(circle, rgba(94, 234, 212, 0.22) 0%, transparent 68%);
+  --glow-side: radial-gradient(circle, rgba(94, 234, 212, 0.16) 0%, transparent 68%);
+  --selection: rgba(94, 234, 212, 0.35);
+}
+
+/* ============================================================
+   Reset & base
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: var(--accent); text-decoration: none; transition: color .2s ease; }
+a:hover { color: var(--text); }
+::selection { background: var(--selection); }
+
+/* Keyboard focus — visible, on-brand, never for mouse users */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; }
+input, select, textarea { font-family: inherit; }
+input::placeholder, textarea::placeholder { color: rgba(245, 245, 245, 0.35); }
+img { max-width: 100%; display: block; }
+
+@keyframes floatUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   Ambient glow
+   ============================================================ */
+.page { position: relative; width: 100%; background: var(--bg); }
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+.glow--1 { top: -160px; left: 50%; transform: translateX(-40%); width: 900px; height: 900px; background: var(--glow-hero); }
+.glow--2 { top: 2600px; right: -200px; width: 760px; height: 760px; background: var(--glow-side); }
+.glow--3 { top: 4600px; left: -220px; width: 720px; height: 720px; background: var(--glow-hero); }
+:root[data-glow="off"] .glow { display: none; }
+
+/* ============================================================
+   Social arm toggle — driven by `showSocial` in app.js.
+   data-social="off" → web-only mode (FHP not live yet);
+   data-social="on"  → full two-door site. Nothing is deleted —
+   elements just hide/show. Flip the flag to bring social back.
+   ============================================================ */
+:root[data-social="off"] [data-social-only] { display: none !important; }
+:root[data-social="on"]  [data-web-only]    { display: none !important; }
+/* Glows 2 & 3 are positioned for the full-length page; without the
+   hidden sections they'd leave a huge empty scroll area — drop them. */
+:root[data-social="off"] .glow--2,
+:root[data-social="off"] .glow--3 { display: none; }
+
+/* "Coming soon" teaser pill in the hero (web-only mode) */
+.hero__soon {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 9px 16px;
+  border: 1px solid var(--accent-border);
+  border-radius: 100px;
+  background: var(--accent-tint);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: rgba(245, 245, 245, 0.82);
+}
+/* Muted "soon" note in the footer services list */
+.footer__soon { color: rgba(245, 245, 245, 0.38); font-size: 14.5px; }
+
+/* ============================================================
+   Container / section rhythm
+   ============================================================ */
+.section {
+  position: relative;
+  z-index: 1;
+  max-width: var(--container);
+  margin: 0 auto;
+  width: 100%;
+  padding: 90px var(--pad-x);
+}
+
+/* ============================================================
+   Nav
+   ============================================================ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px var(--pad-x);
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.wordmark {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.wordmark .x { opacity: 0.4; font-weight: 400; }
+.nav__links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  font-size: 14.5px;
+  font-weight: 500;
+}
+.nav__links a { color: rgba(245, 245, 245, 0.7); }
+.nav__links a:hover { color: var(--text); }
+.nav__toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  padding: 6px;
+  width: 40px;
+  height: 40px;
+}
+.nav__toggle span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text);
+  margin: 5px auto;
+  transition: transform .25s ease, opacity .2s ease;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 600;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: color .2s ease, background .2s ease, filter .2s ease;
+  white-space: nowrap;
+}
+.btn--solid { background: var(--text); color: #000; }
+.btn--solid:hover { color: #000; filter: brightness(0.9); }
+.btn--ghost { border: 1px solid rgba(255, 255, 255, 0.18); color: var(--text); }
+.btn--ghost:hover { color: var(--text); background: rgba(255, 255, 255, 0.05); }
+.btn--nav { font-size: 14.5px; padding: 11px 22px; }
+.btn--hero { font-size: 16px; padding: 16px 30px; }
+.btn--card { font-size: 15px; padding: 13px; width: 100%; }
+.btn__arrow {
+  display: inline-flex;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: #000; color: #fff;
+  align-items: center; justify-content: center;
+  font-size: 13px;
+  transition: transform .2s ease;
+}
+.btn--hero:hover .btn__arrow { transform: translateX(3px); }
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero { padding: 120px var(--pad-x) 130px; }
+/* Animated light-beams background (canvas). The hero is a 1240px centred
+   column, so the canvas is pulled out to full viewport width (100vw,
+   re-centred) — otherwise the beams stop at the content edge. */
+.hero__beams {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  /* Single composited blur softens the beams (replaces the costly
+     per-beam canvas blur that ran every frame). */
+  filter: blur(18px);
+  will-change: transform;
+}
+.eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(245, 245, 245, 0.75);
+  margin-bottom: 44px;
+}
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(52px, 9vw, 132px);
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  max-width: 14ch;
+  text-wrap: balance;
+}
+.hero__sub {
+  margin-top: 34px;
+  font-size: clamp(17px, 1.7vw, 21px);
+  line-height: 1.6;
+  color: rgba(245, 245, 245, 0.68);
+  max-width: 56ch;
+}
+.hero__ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 44px; }
+.hero__chips {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-top: 64px;
+  padding-top: 34px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(245, 245, 245, 0.55);
+}
+.hero__chips .sep { color: rgba(255, 255, 255, 0.2); }
+
+/* Orchestrated hero entrance — the one deliberate motion moment.
+   Elements rise and fade in sequence on load. */
+.hero .eyebrow-pill,
+.hero h1,
+.hero__sub,
+.hero__ctas,
+.hero__chips,
+.hero__soon { animation: floatUp .8s cubic-bezier(.22, .61, .36, 1) both; }
+.hero .eyebrow-pill { animation-delay: .05s; }
+.hero h1          { animation-delay: .16s; }
+.hero__sub        { animation-delay: .32s; }
+.hero__ctas       { animation-delay: .46s; }
+.hero__chips      { animation-delay: .58s; }
+.hero__soon       { animation-delay: .66s; }
+
+/* ============================================================
+   Section header block
+   ============================================================ */
+.head { display: flex; flex-direction: column; gap: 14px; margin-bottom: 52px; }
+.head__eyebrow {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+.head h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(32px, 4.6vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+}
+.head p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(245, 245, 245, 0.62);
+  max-width: 52ch;
+}
+
+/* ============================================================
+   Cards
+   ============================================================ */
+.grid { display: grid; gap: 20px; }
+.grid--280 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.grid--290 { grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+.grid--250 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 34px;
+  /* backdrop-filter dropped for performance — negligible over the near-black bg */
+  display: flex;
+  flex-direction: column;
+}
+.card--pop {
+  position: relative;
+  background: var(--accent-tint);
+  border: 1px solid var(--accent-border);
+}
+.card--pop.card--pop-strong { background: var(--accent-tint-strong); }
+.card--tall { min-height: 280px; gap: 16px; }
+.card--bundle { min-height: 250px; gap: 14px; }
+
+/* Spotlight — mouse-follow radial glow (cards, strips, panels).
+   JS sets --spot-x / --spot-y / --spot-opacity per element. */
+.card, .strip, .panel { position: relative; overflow: hidden; transition: border-color .2s ease, transform .25s ease; }
+.card::before, .strip::before, .panel::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: var(--spot-opacity, 0);
+  transition: opacity .3s ease;
+  background: radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+              var(--spot-color, rgba(255, 255, 255, 0.14)), transparent 40%);
+}
+/* Keep real content above the glow */
+.card > *, .strip > *, .panel > * { position: relative; z-index: 1; }
+/* Highlighted cards glow in the accent colour */
+.card--pop { --spot-color: color-mix(in srgb, var(--accent) 24%, transparent); }
+/* Border lifts slightly on hover (mirrors the source component) */
+.card:hover, .strip:hover, .panel:hover { border-color: rgba(255, 255, 255, 0.16); }
+.card--pop:hover { border-color: var(--accent-border); }
+/* Subtle tactile lift on the discrete cards only (not full-width strips) */
+.card:hover { transform: translateY(-3px); }
+
+.badge {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 6px 12px;
+  border-radius: 100px;
+  background: var(--accent);
+  color: #fff;
+}
+.kicker { font-family: var(--font-display); font-size: 13px; color: rgba(245, 245, 245, 0.4); }
+.kicker--pop { color: rgba(245, 245, 245, 0.5); }
+
+.card h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: -0.01em;
+}
+.card--tier h3 { font-size: 24px; }
+.card__desc { font-size: 16px; line-height: 1.62; color: rgba(245, 245, 245, 0.66); margin-top: auto; }
+.card--pop .card__desc { color: rgba(245, 245, 245, 0.78); }
+
+/* Tier cards with feature rows */
+.tier__desc { font-size: 15px; line-height: 1.55; color: rgba(245, 245, 245, 0.6); margin-top: 8px; }
+.features { display: flex; flex-direction: column; margin-top: 24px; margin-bottom: 26px; }
+.features .row {
+  padding: 13px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 15px;
+  color: rgba(245, 245, 245, 0.75);
+}
+.card--pop .features .row { border-top-color: rgba(255, 255, 255, 0.1); color: rgba(245, 245, 245, 0.82); }
+.card--tier .btn { margin-top: auto; }
+
+/* Combo line (bundles) */
+.combo { font-size: 14px; font-weight: 600; color: var(--accent); }
+
+/* Full-width glass strip */
+.strip {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 30px 34px;
+  /* backdrop-filter dropped for performance — negligible over the near-black bg */
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.strip__text { max-width: 62ch; }
+.strip h4 { font-family: var(--font-display); font-weight: 600; font-size: 20px; }
+.strip p { font-size: 15.5px; line-height: 1.55; color: rgba(245, 245, 245, 0.66); margin-top: 10px; }
+.strip .btn { width: auto; }
+
+/* "Only with a bundle" panel */
+.panel {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 30px 34px;
+  /* backdrop-filter dropped for performance — negligible over the near-black bg */
+  margin-top: 20px;
+}
+.panel__label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: rgba(245, 245, 245, 0.5);
+  display: block;
+  margin-bottom: 24px;
+}
+.panel__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.panel__item { display: flex; gap: 12px; }
+.panel__item .dot { margin-top: 7px; }
+.panel__item span:last-child { font-size: 15.5px; line-height: 1.55; color: rgba(245, 245, 245, 0.78); }
+
+/* ============================================================
+   Where the lines meet
+   ============================================================ */
+.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.pillar {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.pillar__label { font-family: var(--font-display); font-size: 15px; color: var(--accent); }
+.pillar p { font-size: 16px; line-height: 1.62; color: rgba(245, 245, 245, 0.7); }
+
+/* ============================================================
+   Process steps
+   ============================================================ */
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+/* Keep all four steps on one row on desktop; collapse gracefully below */
+@media (max-width: 860px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 440px) { .steps { grid-template-columns: 1fr; } }
+.step { display: flex; flex-direction: column; gap: 12px; }
+.step__num { font-family: var(--font-display); font-size: 44px; font-weight: 500; color: rgba(255, 255, 255, 0.14); line-height: 1; }
+.step h4 { font-family: var(--font-display); font-weight: 600; font-size: 20px; }
+.step p { font-size: 15.5px; line-height: 1.6; color: rgba(245, 245, 245, 0.64); }
+
+/* ============================================================
+   Contact
+   ============================================================ */
+.contact { padding: 90px var(--pad-x) 110px; }
+.contact__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 44px; align-items: start; }
+.contact h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(34px, 4.8vw, 60px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  max-width: 14ch;
+  margin-top: 14px;
+}
+.contact__intro { font-size: 17px; line-height: 1.6; color: rgba(245, 245, 245, 0.62); max-width: 46ch; margin-top: 24px; }
+.details { border-top: 1px solid rgba(255, 255, 255, 0.12); padding-top: 26px; margin-top: 34px; display: flex; flex-direction: column; gap: 16px; }
+.details__row { display: flex; justify-content: space-between; gap: 20px; font-size: 15.5px; }
+.details__row .label { color: rgba(245, 245, 245, 0.5); }
+
+.form-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 26px;
+  padding: 36px;
+  /* backdrop-filter dropped for performance — negligible over the near-black bg */
+}
+.field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+.field label { font-size: 13.5px; font-weight: 600; color: rgba(245, 245, 245, 0.7); }
+.field input,
+.field select,
+.field textarea {
+  background: var(--input-bg);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 13px 15px;
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+  transition: border-color .2s ease;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus { border-color: var(--accent); }
+.field textarea { resize: vertical; }
+.field select option { background: #111; }
+.form-card .btn { margin-top: 6px; padding: 15px; font-size: 16px; }
+
+/* Submitted state */
+.thanks { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; padding: 20px 0; }
+.thanks__check {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+}
+.thanks h3 { font-family: var(--font-display); font-weight: 600; font-size: 24px; }
+.thanks p { font-size: 15.5px; line-height: 1.6; color: rgba(245, 245, 245, 0.64); max-width: 34ch; }
+[hidden] { display: none !important; }
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.footer { border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.footer__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 56px var(--pad-x) 60px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+}
+.footer__brand { max-width: 42ch; display: flex; flex-direction: column; gap: 12px; }
+.footer__brand .wordmark { font-size: 20px; }
+.footer__brand p { font-size: 15px; line-height: 1.6; color: rgba(245, 245, 245, 0.55); }
+.footer__brand .sub { font-size: 13.5px; color: rgba(245, 245, 245, 0.4); }
+.footer__cols { display: flex; gap: 56px; flex-wrap: wrap; }
+.footer__col { display: flex; flex-direction: column; gap: 12px; }
+.footer__col h5 { font-size: 14px; font-weight: 600; color: rgba(245, 245, 245, 0.4); }
+.footer__col a { color: rgba(245, 245, 245, 0.7); font-size: 14.5px; }
+.footer__col a:hover { color: var(--text); }
+.footer__bottom {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+.footer__bottom-inner {
+  margin-top: 0;
+  padding: 24px 0 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 13px;
+  color: rgba(245, 245, 245, 0.4);
+}
+
+/* ============================================================
+   Mobile nav
+   ============================================================ */
+@media (max-width: 1024px) {
+  .nav__toggle { display: block; }
+  .nav__links {
+    position: fixed;
+    inset: 64px 0 auto 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 16px var(--pad-x) 24px;
+    background: rgba(8, 8, 8, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 24px 40px rgba(0, 0, 0, 0.5);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease;
+  }
+  .nav__links a { padding: 12px 0; font-size: 16px; width: 100%; }
+  .nav[data-open="true"] .nav__links { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .nav[data-open="true"] .nav__toggle span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav[data-open="true"] .nav__toggle span:nth-child(2) { opacity: 0; }
+  .nav[data-open="true"] .nav__toggle span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+}
+
+/* ============================================================
+   Respect reduced-motion — neutralise all animation/transition.
+   (The beams canvas checks this separately in JS.)
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,48 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 1024px;
+  height: 1024px;
+  overflow: hidden;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  background: #08080A;
+  font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.canvas {
+  position: relative;
+  width: 1024px;
+  height: 1024px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* soft brand glow */
+.glow {
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  background:
+    radial-gradient(46% 40% at 26% 20%, rgba(76, 111, 255, 0.26), transparent 70%),
+    radial-gradient(40% 40% at 82% 88%, rgba(76, 111, 255, 0.14), transparent 72%);
+  filter: blur(10px);
+}
+
+/* fine grain so the flat black doesn't band */
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0.035;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+}
+
+.lockup { position: relative; z-index: 2; text-align: center; }
