@@ -1,14 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" data-accent="blue" data-glow="on" data-social="on">
+<html lang="en-GB" data-accent="blue" data-glow="on">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WSN × FHP — Web design & social media for UK business</title>
-  <meta name="description" content="Web design and social media marketing for UK local business — one agency, two doors in. Come to us for a website, for your socials, or for both.">
+  <title>WSN — Premium Web Design Studio in Staffordshire</title>
+  <meta name="description" content="Premium web design in Staffordshire. WSN builds fast, custom websites for local business — made to get you found and get you calls. Book a free discovery call.">
+  <meta name="theme-color" content="#000000">
+  <!-- TODO before publishing: replace www.wsnstudio.co.uk with your real domain -->
+  <link rel="canonical" href="https://www.wsnstudio.co.uk/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="WSN — Premium Web Design Studio in Staffordshire">
+  <meta property="og:description" content="Fast, custom websites for local business — made to get you found and get you calls.">
+  <meta property="og:image" content="https://www.wsnstudio.co.uk/social/wsn-og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://www.wsnstudio.co.uk/">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Organization schema (privacy-friendly: no phone, address or geo).
+       TODO before publishing: replace domain, email and social URLs with your real details. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://www.wsnstudio.co.uk/#studio",
+    "name": "WSN Web Design Studio",
+    "description": "Premium web design studio serving Staffordshire and the UK, building fast, custom websites for local business.",
+    "url": "https://www.wsnstudio.co.uk/",
+    "image": "https://www.wsnstudio.co.uk/social/wsn-og.png",
+    "logo": "https://www.wsnstudio.co.uk/logo.png",
+    "email": "hello@wsnstudio.co.uk",
+    "founder": { "@type": "Person", "name": "William" },
+    "areaServed": [
+      { "@type": "AdministrativeArea", "name": "Staffordshire" },
+      { "@type": "Country", "name": "United Kingdom" }
+    ],
+    "sameAs": [
+      "https://www.linkedin.com/company/your-handle",
+      "https://www.instagram.com/your-handle"
+    ]
+  }
+  </script>
 </head>
 <body>
 <div class="page">
@@ -16,17 +52,14 @@
   <!-- Ambient glow -->
   <div class="glow glow--1" aria-hidden="true"></div>
   <div class="glow glow--2" aria-hidden="true"></div>
-  <div class="glow glow--3" aria-hidden="true"></div>
 
   <!-- NAV -->
   <nav class="nav" id="nav" data-open="false">
-    <a href="#top" class="wordmark">WSN <span class="x">×</span> <span data-social-name>FHP</span></a>
+    <a href="#top" class="wordmark">WSN</a>
     <div class="nav__links" id="navLinks">
-      <a href="#ways" data-social-only>Ways to work</a>
       <a href="#web">Web design</a>
-      <a href="#social" data-social-only>Social media marketing</a>
-      <a href="#bundles" data-social-only>Bundles</a>
       <a href="#process">How we work</a>
+      <a href="#faq">FAQ</a>
     </div>
     <a href="#contact" class="btn btn--solid btn--nav">Book a call</a>
     <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
@@ -37,80 +70,34 @@
   <!-- HERO -->
   <header id="top" class="section hero">
     <canvas id="beams" class="hero__beams" aria-hidden="true"></canvas>
-    <div class="eyebrow-pill" data-social-only>
-      <span class="dot"></span>
-      UK web design &amp; social media · WSN × <span data-social-name>FHP</span>
-    </div>
-    <div class="eyebrow-pill" data-web-only>
+    <div class="eyebrow-pill">
       <span class="dot"></span>
       UK web design for local business · WSN
     </div>
 
-    <h1 data-social-only>One agency. Two doors in.</h1>
-    <h1 data-web-only>A website that works as hard as you do.</h1>
+    <h1>A website that works as hard as you do.</h1>
 
-    <p class="hero__sub" data-social-only>Web design and social media marketing, run by one team. Come to us for a website, for your socials, or for both — and add the other whenever you're ready.</p>
-    <p class="hero__sub" data-web-only>Clean, credible, custom websites for UK local business — built to get you found, get you calls, and grow with you. From a one-off build to an ongoing care plan.</p>
+    <p class="hero__sub">Clean, credible, custom websites for UK local business — built to get you found, get you calls, and grow with you. From a one-off build to an ongoing care plan.</p>
 
     <div class="hero__ctas">
       <a href="#contact" class="btn btn--solid btn--hero">Book a call <span class="btn__arrow">→</span></a>
-      <a href="#ways" class="btn btn--ghost btn--hero" data-social-only>See how we work</a>
-      <a href="#web" class="btn btn--ghost btn--hero" data-web-only>See our packages</a>
+      <a href="#web" class="btn btn--ghost btn--hero">See our packages</a>
     </div>
 
-    <div class="hero__chips" data-social-only>
-      <span>Websites</span><span class="sep">/</span>
-      <span>Social media marketing</span><span class="sep">/</span>
-      <span>Bundled packages</span><span class="sep">/</span>
-      <span>One named strategist</span>
-    </div>
-    <div class="hero__chips" data-web-only>
+    <div class="hero__chips">
       <span>Custom websites</span><span class="sep">/</span>
       <span>Care plans</span><span class="sep">/</span>
       <span>E-commerce &amp; booking</span><span class="sep">/</span>
       <span>One named point of contact</span>
     </div>
-
-    <div class="hero__soon" data-web-only>
-      <span class="dot"></span>
-      Social media marketing — coming soon
-    </div>
   </header>
 
-  <!-- 01 · WAYS TO WORK -->
-  <section id="ways" class="section" data-social-only>
-    <div class="head">
-      <span class="head__eyebrow">01 / Ways to work</span>
-      <h2>Come through whichever door fits</h2>
-      <p>Nobody's forced into a bundle. But whichever way you start, adding the other side later is easy and natural.</p>
-    </div>
-    <div class="grid grid--280">
-      <div class="card card--tall">
-        <span class="kicker">Door 01</span>
-        <h3>Website only</h3>
-        <p class="card__desc">A site that works as hard as you do. A one-off build or an ongoing care plan — no strings, no bundle required.</p>
-      </div>
-      <div class="card card--tall">
-        <span class="kicker">Door 02</span>
-        <h3>Social only</h3>
-        <p class="card__desc">Your social presence, run properly by a named strategist who actually knows your business — not a rotating queue.</p>
-      </div>
-      <div class="card card--pop card--tall">
-        <span class="badge">Most popular</span>
-        <span class="kicker kicker--pop">Doors 01 + 02</span>
-        <h3>Both, bundled</h3>
-        <p class="card__desc">Your full online presence under one roof — one strategist, one plan, one invoice, priced below buying the two separately.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 02 · WEB DESIGN -->
+  <!-- 01 · WEB DESIGN -->
   <section id="web" class="section">
     <div class="head">
-      <span class="head__eyebrow" data-social-only>02 / Web design · WSN, by William</span>
-      <span class="head__eyebrow" data-web-only>01 / Web design · WSN, by William</span>
+      <span class="head__eyebrow">01 / Web design</span>
       <h2>Websites built for local business</h2>
-      <p>A core, standalone offer — plenty of clients only ever want a great site, and that's exactly right.</p>
+      <p>From a simple brochure site to a full e-commerce build — clean, credible, and made to get you found, get you calls, and grow with you.</p>
     </div>
     <div class="grid grid--290">
       <div class="card card--tier">
@@ -154,123 +141,17 @@
     <div class="strip">
       <div class="strip__text">
         <h4>Care Plan — on every tier</h4>
-        <p>Hosting, security updates, uptime monitoring and small content edits. The easy way to keep your site healthy long after launch — and the natural first step from a one-off build to an ongoing partnership.</p>
+        <p>Hosting, security updates, uptime monitoring and small content edits. The easy way to keep your site healthy long after launch — and the natural next step from a one-off build to an ongoing partnership.</p>
       </div>
       <a href="#contact" class="btn btn--ghost btn--card">Ask about care plans</a>
     </div>
   </section>
 
-  <!-- 03 · SOCIAL MEDIA -->
-  <section id="social" class="section" data-social-only>
-    <div class="head">
-      <span class="head__eyebrow">03 / Social media marketing · <span data-social-name>FHP</span>, by Fredrick</span>
-      <h2>Social media, built on relationships</h2>
-      <p>One named strategist for the life of the relationship — someone who knows your goals, your seasons and your tone. Not whoever's free that day.</p>
-    </div>
-    <div class="grid grid--290">
-      <div class="card card--tier">
-        <h3>Foundation</h3>
-        <p class="tier__desc">A steady, reliable presence, handled for you.</p>
-        <div class="features">
-          <div class="row">2 platforms</div>
-          <div class="row">8–12 posts / month</div>
-          <div class="row">Templated design</div>
-          <div class="row">Monthly report</div>
-          <div class="row">Monthly check-in call</div>
-        </div>
-        <a href="#contact" class="btn btn--ghost btn--card">Get a quote</a>
-      </div>
-      <div class="card card--pop card--tier">
-        <span class="badge">Popular</span>
-        <h3>Growth</h3>
-        <p class="tier__desc">For businesses ready to actively grow with paid reach.</p>
-        <div class="features">
-          <div class="row">3–4 platforms</div>
-          <div class="row">20+ posts / month</div>
-          <div class="row">Custom design</div>
-          <div class="row">Paid ad management</div>
-          <div class="row">Named strategist · quarterly review</div>
-        </div>
-        <a href="#contact" class="btn btn--solid btn--card">Get a quote</a>
-      </div>
-      <div class="card card--tier">
-        <h3>Signature</h3>
-        <p class="tier__desc">The highest-touch service, fully hands-off for you.</p>
-        <div class="features">
-          <div class="row">All relevant platforms</div>
-          <div class="row">40+ posts / month</div>
-          <div class="row">Photo &amp; video</div>
-          <div class="row">Full paid ads &amp; local partnerships</div>
-          <div class="row">Monthly in-person / video review</div>
-        </div>
-        <a href="#contact" class="btn btn--ghost btn--card">Get a quote</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 04 · BUNDLES -->
-  <section id="bundles" class="section" data-social-only>
-    <div class="head">
-      <span class="head__eyebrow">04 / The flagship</span>
-      <h2>Everything, pulling in one direction</h2>
-      <p>A bundle isn't a discount tacked on. It's one strategist and one Success Plan across your whole online presence — so your site and your socials always work together, priced below buying them separately.</p>
-    </div>
-    <div class="grid grid--290" style="gap:14px">
-      <div class="card card--bundle">
-        <h3>Launch Bundle</h3>
-        <span class="combo">Starter site + Foundation social</span>
-        <p class="card__desc">New to online? A working site and a steady social presence from day one — the whole thing set up and running for you.</p>
-      </div>
-      <div class="card card--pop card--pop-strong card--bundle">
-        <span class="badge">Most chosen</span>
-        <h3>Growth Bundle</h3>
-        <span class="combo">Business site + Growth social</span>
-        <p class="card__desc">Established and ready to grow: a stronger, fully custom site plus paid ads and a named strategist steering both.</p>
-      </div>
-      <div class="card card--bundle">
-        <h3>Signature Bundle</h3>
-        <span class="combo">Premium site + Signature social</span>
-        <p class="card__desc">A full bespoke presence with the highest-touch social service, and one dedicated strategist for absolutely everything.</p>
-      </div>
-    </div>
-    <div class="panel">
-      <span class="panel__label">ONLY WITH A BUNDLE</span>
-      <div class="panel__grid">
-        <div class="panel__item"><span class="dot"></span><span>One named strategist for your site and your socials — not two separate contacts.</span></div>
-        <div class="panel__item"><span class="dot"></span><span>One combined Success Plan and report, so site and social are read side by side.</span></div>
-        <div class="panel__item"><span class="dot"></span><span>One invoice, and priority scheduling for both the build and the ongoing work.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 05 · WHERE THE LINES MEET -->
-  <section class="section" data-social-only>
-    <div class="head">
-      <span class="head__eyebrow">05 / Where the lines meet</span>
-      <h2>Start anywhere. Grow naturally.</h2>
-    </div>
-    <div class="pillars">
-      <div class="pillar">
-        <span class="pillar__label">Website client →</span>
-        <p>When a refresh or care-plan check-in comes around, that's the natural moment to talk about running your socials too.</p>
-      </div>
-      <div class="pillar">
-        <span class="pillar__label">Social client →</span>
-        <p>If your site is outdated or underperforming, we bring in web design and move you onto a bundle — one team, one plan.</p>
-      </div>
-      <div class="pillar">
-        <span class="pillar__label">New to both →</span>
-        <p>See all three doors up front — website, social, or both — and pick what genuinely fits where you are today.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 06 · HOW WE WORK -->
+  <!-- 02 · HOW WE WORK -->
   <section id="process" class="section">
     <div class="head">
-      <span class="head__eyebrow" data-social-only>06 / How we work</span>
-      <span class="head__eyebrow" data-web-only>02 / How we work</span>
-      <h2>One team, one plan, one point of contact</h2>
+      <span class="head__eyebrow">02 / How we work</span>
+      <h2>One plan, one point of contact</h2>
     </div>
     <div class="steps">
       <div class="step">
@@ -281,20 +162,90 @@
       <div class="step">
         <span class="step__num">02</span>
         <h4>Success Plan</h4>
-        <p>A short, co-owned plan your strategist actually works to — not a document that gathers dust.</p>
+        <p>A short, co-owned plan we actually work to — not a document that gathers dust.</p>
       </div>
       <div class="step">
         <span class="step__num">03</span>
         <h4>Build &amp; launch</h4>
-        <p data-social-only>Your site, your socials, or both — delivered by a team that actually talks to each other.</p>
-        <p data-web-only>Your website — designed, built and launched by a team that sweats the details and talks to each other.</p>
+        <p>Your website — designed, built and launched by someone who sweats the details and stays in touch.</p>
       </div>
       <div class="step">
         <span class="step__num">04</span>
         <h4>Ongoing partnership</h4>
-        <p>Monthly check-ins, quarterly reviews and an always-open line. We suggest more only when it genuinely helps.</p>
+        <p>Care plans, check-ins and an always-open line. We suggest more only when it genuinely helps.</p>
       </div>
     </div>
+  </section>
+
+  <!-- 03 · FAQ -->
+  <section id="faq" class="section">
+    <div class="head">
+      <span class="head__eyebrow">03 / FAQ</span>
+      <h2>Questions, answered</h2>
+      <p>The things most people ask before we start — pricing, timelines, ownership, and what happens after launch.</p>
+    </div>
+    <ul class="faq">
+      <li class="faq__item">
+        <button class="faq__q" id="faq-t-1" aria-controls="faq-p-1" aria-expanded="false">
+          <span class="faq__icon" aria-hidden="true"><span class="faq__plus"></span></span>
+          <span class="faq__q-text">How much does a website cost?</span>
+          <span class="faq__meta">Pricing</span>
+        </button>
+        <div class="faq__a" id="faq-p-1" role="region" aria-labelledby="faq-t-1">
+          <p>Every site is quoted to the brief, so there's no fixed price list — you'll know the full cost before we start, with no hourly meter. Most local-business sites land in a clear range we'll confirm on our first call.</p>
+        </div>
+      </li>
+      <li class="faq__item">
+        <button class="faq__q" id="faq-t-2" aria-controls="faq-p-2" aria-expanded="false">
+          <span class="faq__icon" aria-hidden="true"><span class="faq__plus"></span></span>
+          <span class="faq__q-text">How long does it take?</span>
+          <span class="faq__meta">Timeline</span>
+        </button>
+        <div class="faq__a" id="faq-p-2" role="region" aria-labelledby="faq-t-2">
+          <p>A Starter brochure site is usually 2–3 weeks, a fully custom Business site 4–6, and e-commerce a little longer. We agree the timeline up front and keep you posted at every stage.</p>
+        </div>
+      </li>
+      <li class="faq__item">
+        <button class="faq__q" id="faq-t-3" aria-controls="faq-p-3" aria-expanded="false">
+          <span class="faq__icon" aria-hidden="true"><span class="faq__plus"></span></span>
+          <span class="faq__q-text">Do I own my website?</span>
+          <span class="faq__meta">Ownership</span>
+        </button>
+        <div class="faq__a" id="faq-p-3" role="region" aria-labelledby="faq-t-3">
+          <p>Completely. The site, the domain, the content and the logins are all yours — built on tools you can keep and handed over in full at launch. No lock-in.</p>
+        </div>
+      </li>
+      <li class="faq__item">
+        <button class="faq__q" id="faq-t-4" aria-controls="faq-p-4" aria-expanded="false">
+          <span class="faq__icon" aria-hidden="true"><span class="faq__plus"></span></span>
+          <span class="faq__q-text">Can I update the site myself?</span>
+          <span class="faq__meta">Editing</span>
+        </button>
+        <div class="faq__a" id="faq-p-4" role="region" aria-labelledby="faq-t-4">
+          <p>On Business and Premium builds, yes — we set up a simple CMS and show you how to edit text, images and pages. Prefer us to handle it? That's what the Care Plan is for.</p>
+        </div>
+      </li>
+      <li class="faq__item">
+        <button class="faq__q" id="faq-t-5" aria-controls="faq-p-5" aria-expanded="false">
+          <span class="faq__icon" aria-hidden="true"><span class="faq__plus"></span></span>
+          <span class="faq__q-text">Will my site be found on Google?</span>
+          <span class="faq__meta">SEO</span>
+        </button>
+        <div class="faq__a" id="faq-p-5" role="region" aria-labelledby="faq-t-5">
+          <p>Every build includes on-page SEO — clean structure, fast load times and the basics search engines look for. Higher tiers go further, and we're happy to advise on local listings like Google Business Profile.</p>
+        </div>
+      </li>
+      <li class="faq__item">
+        <button class="faq__q" id="faq-t-6" aria-controls="faq-p-6" aria-expanded="false">
+          <span class="faq__icon" aria-hidden="true"><span class="faq__plus"></span></span>
+          <span class="faq__q-text">What happens after launch?</span>
+          <span class="faq__meta">Aftercare</span>
+        </button>
+        <div class="faq__a" id="faq-p-6" role="region" aria-labelledby="faq-t-6">
+          <p>That's the Care Plan: hosting, security updates, uptime monitoring and small edits, so your site stays healthy long after go-live. It's optional, and the natural next step from a one-off build.</p>
+        </div>
+      </li>
+    </ul>
   </section>
 
   <!-- CONTACT -->
@@ -302,9 +253,8 @@
     <div class="contact__grid">
       <div class="contact__left">
         <span class="head__eyebrow">Book a call</span>
-        <h2>Let's talk about your online presence</h2>
-        <p class="contact__intro" data-social-only>Tell us where you are today and what you want next. We'll come back with the door — or the bundle — that fits.</p>
-        <p class="contact__intro" data-web-only>Tell us where you are today and what you want from your website. We'll come back with a plan that fits — and a quote.</p>
+        <h2>Let's talk about your website</h2>
+        <p class="contact__intro">Tell us where you are today and what you want from your website. We'll come back with a plan that fits — and a quote.</p>
         <div class="details">
           <div class="details__row"><span class="label">Email</span><a href="mailto:hello@wsn.example">hello@wsn.example</a></div>
           <div class="details__row"><span class="label">Based</span><span>United Kingdom · remote-friendly</span></div>
@@ -325,18 +275,9 @@
             <label for="f-email">Email</label>
             <input id="f-email" name="email" type="email" required placeholder="you@business.co.uk">
           </div>
-          <div class="field" data-social-only>
+          <div class="field">
             <label for="f-interest">I'm interested in</label>
             <select id="f-interest" name="interest">
-              <option>A website</option>
-              <option>Social media marketing</option>
-              <option>Both — a bundle</option>
-              <option>Not sure yet</option>
-            </select>
-          </div>
-          <div class="field" data-web-only>
-            <label for="f-interest-web">I'm interested in</label>
-            <select id="f-interest-web" name="interest">
               <option>A new website</option>
               <option>A website redesign</option>
               <option>A care plan (existing site)</option>
@@ -363,34 +304,36 @@
   <footer class="footer">
     <div class="footer__inner">
       <div class="footer__brand">
-        <span class="wordmark">WSN <span class="x">×</span> <span data-social-name>FHP</span></span>
-        <p data-social-only>Web design and social media marketing for UK local businesses — one agency, two doors in.</p>
-        <p data-web-only>Web design for UK local businesses — clean, credible, custom sites built to get you found and get you calls.</p>
-        <span class="sub" data-social-only>WSN by William · <span data-social-name>FHP</span> by Fredrick.</span>
-        <span class="sub" data-web-only><span data-social-name>FHP</span> by Fredrick — social media marketing, coming soon.</span>
+        <span class="wordmark">WSN</span>
+        <p>Web design for UK local businesses — clean, credible, custom sites built to get you found and get you calls.</p>
+        <span class="sub">WSN — web design, by William.</span>
       </div>
       <div class="footer__cols">
         <div class="footer__col">
           <h5>Services</h5>
           <a href="#web">Web design</a>
-          <a href="#social" data-social-only>Social media marketing</a>
-          <a href="#bundles" data-social-only>Bundles</a>
-          <span class="footer__soon" data-web-only>Social media marketing — soon</span>
+          <a href="#web">Care plans</a>
         </div>
         <div class="footer__col">
           <h5>Agency</h5>
           <a href="#process">How we work</a>
-          <a href="#ways" data-social-only>Ways to work</a>
+          <a href="#faq">FAQ</a>
           <a href="#contact">Book a call</a>
         </div>
       </div>
     </div>
     <div class="footer__bottom">
-      <div class="footer__bottom-inner">© 2026 WSN × <span data-social-name>FHP</span>. All rights reserved.</div>
+      <div class="footer__bottom-inner">© 2026 WSN. All rights reserved.</div>
     </div>
   </footer>
 
 </div>
+
+<!-- Sticky mobile CTA (shows on small screens only) -->
+<aside class="wsn-sticky-cta" aria-label="Quick contact">
+  <a class="wsn-sticky-cta__book" href="#contact">Book a free call</a>
+</aside>
+
 <script src="app.js"></script>
 </body>
 </html>

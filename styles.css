@@ -91,38 +91,7 @@ img { max-width: 100%; display: block; }
 }
 .glow--1 { top: -160px; left: 50%; transform: translateX(-40%); width: 900px; height: 900px; background: var(--glow-hero); }
 .glow--2 { top: 2600px; right: -200px; width: 760px; height: 760px; background: var(--glow-side); }
-.glow--3 { top: 4600px; left: -220px; width: 720px; height: 720px; background: var(--glow-hero); }
 :root[data-glow="off"] .glow { display: none; }
-
-/* ============================================================
-   Social arm toggle — driven by `showSocial` in app.js.
-   data-social="off" → web-only mode (FHP not live yet);
-   data-social="on"  → full two-door site. Nothing is deleted —
-   elements just hide/show. Flip the flag to bring social back.
-   ============================================================ */
-:root[data-social="off"] [data-social-only] { display: none !important; }
-:root[data-social="on"]  [data-web-only]    { display: none !important; }
-/* Glows 2 & 3 are positioned for the full-length page; without the
-   hidden sections they'd leave a huge empty scroll area — drop them. */
-:root[data-social="off"] .glow--2,
-:root[data-social="off"] .glow--3 { display: none; }
-
-/* "Coming soon" teaser pill in the hero (web-only mode) */
-.hero__soon {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 28px;
-  padding: 9px 16px;
-  border: 1px solid var(--accent-border);
-  border-radius: 100px;
-  background: var(--accent-tint);
-  font-size: 13.5px;
-  font-weight: 500;
-  color: rgba(245, 245, 245, 0.82);
-}
-/* Muted "soon" note in the footer services list */
-.footer__soon { color: rgba(245, 245, 245, 0.38); font-size: 14.5px; }
 
 /* ============================================================
    Container / section rhythm
@@ -290,14 +259,12 @@ img { max-width: 100%; display: block; }
 .hero h1,
 .hero__sub,
 .hero__ctas,
-.hero__chips,
-.hero__soon { animation: floatUp .8s cubic-bezier(.22, .61, .36, 1) both; }
+.hero__chips { animation: floatUp .8s cubic-bezier(.22, .61, .36, 1) both; }
 .hero .eyebrow-pill { animation-delay: .05s; }
 .hero h1          { animation-delay: .16s; }
 .hero__sub        { animation-delay: .32s; }
 .hero__ctas       { animation-delay: .46s; }
 .hero__chips      { animation-delay: .58s; }
-.hero__soon       { animation-delay: .66s; }
 
 /* ============================================================
    Section header block
@@ -352,8 +319,8 @@ img { max-width: 100%; display: block; }
 
 /* Spotlight — mouse-follow radial glow (cards, strips, panels).
    JS sets --spot-x / --spot-y / --spot-opacity per element. */
-.card, .strip, .panel { position: relative; overflow: hidden; transition: border-color .2s ease, transform .25s ease; }
-.card::before, .strip::before, .panel::before {
+.card, .strip, .panel, .faq__item { position: relative; overflow: hidden; transition: border-color .2s ease, transform .25s ease; }
+.card::before, .strip::before, .panel::before, .faq__item::before {
   content: "";
   position: absolute;
   inset: -1px;
@@ -365,14 +332,81 @@ img { max-width: 100%; display: block; }
               var(--spot-color, rgba(255, 255, 255, 0.14)), transparent 40%);
 }
 /* Keep real content above the glow */
-.card > *, .strip > *, .panel > * { position: relative; z-index: 1; }
+.card > *, .strip > *, .panel > *, .faq__item > * { position: relative; z-index: 1; }
 /* Highlighted cards glow in the accent colour */
 .card--pop { --spot-color: color-mix(in srgb, var(--accent) 24%, transparent); }
 /* Border lifts slightly on hover (mirrors the source component) */
-.card:hover, .strip:hover, .panel:hover { border-color: rgba(255, 255, 255, 0.16); }
+.card:hover, .strip:hover, .panel:hover, .faq__item:hover { border-color: rgba(255, 255, 255, 0.16); }
 .card--pop:hover { border-color: var(--accent-border); }
 /* Subtle tactile lift on the discrete cards only (not full-width strips) */
 .card:hover { transform: translateY(-3px); }
+
+/* ============================================================
+   FAQ accordion
+   ============================================================ */
+.faq { display: flex; flex-direction: column; gap: 14px; list-style: none; }
+.faq__item {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+}
+.faq__q {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  padding: 24px 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text);
+}
+.faq__icon {
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--card-border);
+  background: rgba(255, 255, 255, 0.02);
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .3s ease, background .3s ease;
+}
+.faq__plus { position: relative; width: 15px; height: 15px; transition: transform .4s cubic-bezier(.22, .61, .36, 1); }
+.faq__plus::before, .faq__plus::after { content: ""; position: absolute; background: var(--text); border-radius: 2px; }
+.faq__plus::before { left: 0; right: 0; top: 50%; height: 1.5px; transform: translateY(-50%); }
+.faq__plus::after  { top: 0; bottom: 0; left: 50%; width: 1.5px; transform: translateX(-50%); }
+.faq__q-text {
+  flex: 1 1 auto; min-width: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+}
+.faq__meta {
+  flex-shrink: 0;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  padding: 5px 11px;
+  border: 1px solid var(--card-border);
+  border-radius: 100px;
+  color: rgba(245, 245, 245, 0.5);
+}
+.faq__a { max-height: 0; overflow: hidden; transition: max-height .5s ease; }
+.faq__a p {
+  padding: 0 28px 26px 90px;   /* align under the question text (icon 44 + gap 18 + pad 28) */
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: rgba(245, 245, 245, 0.64);
+}
+.faq__item[data-open] .faq__a { max-height: 340px; }
+.faq__item[data-open] .faq__plus { transform: rotate(45deg); }
+.faq__item[data-open] .faq__icon { border-color: var(--accent-border); background: var(--accent-tint); }
+@media (max-width: 560px) {
+  .faq__q { padding: 20px 22px; gap: 14px; }
+  .faq__a p { padding: 0 22px 24px 22px; }
+  .faq__meta { display: none; }
+}
 
 .badge {
   position: absolute;
@@ -605,6 +639,43 @@ img { max-width: 100%; display: block; }
   .nav[data-open="true"] .nav__toggle span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
   .nav[data-open="true"] .nav__toggle span:nth-child(2) { opacity: 0; }
   .nav[data-open="true"] .nav__toggle span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+}
+
+/* ============================================================
+   Sticky mobile CTA — prefixed, scoped, no global overrides.
+   Hidden on desktop; appears on small screens for thumb reach.
+   ============================================================ */
+.wsn-sticky-cta {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 40;
+  display: none;
+  padding: 10px calc(12px + env(safe-area-inset-right))
+           calc(10px + env(safe-area-inset-bottom))
+           calc(12px + env(safe-area-inset-left));
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.wsn-sticky-cta__book {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  border-radius: 100px;
+  background: #F5F5F5;
+  color: #000;
+  font: 600 15px/1 'Manrope', system-ui, sans-serif;
+  text-decoration: none;
+  transition: filter .2s ease;
+}
+.wsn-sticky-cta__book:hover,
+.wsn-sticky-cta__book:active { filter: brightness(0.9); }
+@media (max-width: 720px) {
+  .wsn-sticky-cta { display: flex; }
+  body { padding-bottom: 80px; } /* stop the bar covering footer content */
 }
 
 /* ============================================================

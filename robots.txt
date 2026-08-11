@@ -1,0 +1,10 @@
+# WSN Web Design Studio — robots.txt
+# TODO before publishing: replace the domain in the Sitemap line with your real domain.
+
+User-agent: *
+Allow: /
+
+# Do not block CSS/JS — search engines need them to render the page.
+# The 404 page carries its own noindex meta tag.
+
+Sitemap: https://www.wsnstudio.co.uk/sitemap.xml

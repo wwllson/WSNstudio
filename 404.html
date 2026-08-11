@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-accent="blue" data-glow="on">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page Not Found | WSN Web Design Studio</title>
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#000000">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .error { min-height: 74vh; display: flex; flex-direction: column; justify-content: center;
+      max-width: 640px; margin: 0 auto; padding: 120px 6vw; }
+    .error__code { font-family: 'Space Grotesk', sans-serif; font-size: clamp(64px, 14vw, 140px);
+      line-height: .9; letter-spacing: -.03em; color: rgba(245, 245, 245, .14); }
+    .error h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+      font-size: clamp(28px, 5vw, 44px); letter-spacing: -.02em; margin-top: 16px; }
+    .error p { color: rgba(245, 245, 245, .64); line-height: 1.6; margin-top: 16px; max-width: 46ch; }
+    .error__links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+  </style>
+</head>
+<body>
+  <main class="error" role="main">
+    <p class="error__code" aria-hidden="true">404</p>
+    <h1>This page has moved on — the work hasn't.</h1>
+    <p>The page you were after isn't here, but everything that matters is a click away:
+       our web design packages, how we work, and a quick way to start a project.</p>
+    <div class="error__links">
+      <a class="btn btn--solid btn--hero" href="/">Back to home</a>
+      <a class="btn btn--ghost btn--hero" href="/#web">See our packages</a>
+      <a class="btn btn--ghost btn--hero" href="/#contact">Book a call</a>
+    </div>
+  </main>
+</body>
+</html>

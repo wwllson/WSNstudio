@@ -1,36 +1,21 @@
 /* ============================================================
-   WSN × FHP — Landing page behavior
+   WSN — Web design agency landing page behavior
    ============================================================ */
 (function () {
   'use strict';
 
   /* --- Config: single source of truth ----------------------
-     socialName : the social-arm brand name (placeholder "FHP").
-                  Change once here to swap it everywhere.
-     accent     : 'blue' | 'purple' | 'cyan'
-     showGlow   : true | false
-     showSocial : true | false — the FHP / social-media-marketing arm.
-                  false → web-only mode (social content hidden, a
-                  "coming soon" teaser shown). Flip to true when the
-                  social side is ready; everything is already built.
-                  (Also update data-social on <html> for no-JS parity.)
+     accent   : 'blue' | 'purple' | 'cyan'
+     showGlow : true | false
   ---------------------------------------------------------- */
   var config = {
-    socialName: 'FHP',
     accent: 'blue',
-    showGlow: true,
-    showSocial: true
+    showGlow: true
   };
 
   var root = document.documentElement;
   root.setAttribute('data-accent', config.accent);
   root.setAttribute('data-glow', config.showGlow ? 'on' : 'off');
-  root.setAttribute('data-social', config.showSocial ? 'on' : 'off');
-
-  // Fill every socialName slot
-  document.querySelectorAll('[data-social-name]').forEach(function (el) {
-    el.textContent = config.socialName;
-  });
 
   /* --- Mobile nav toggle ---------------------------------- */
   var nav = document.getElementById('nav');
@@ -76,7 +61,7 @@
 
   /* --- Spotlight: mouse-follow glow on every glass card --- */
   if (!window.matchMedia('(hover: none)').matches) {
-    document.querySelectorAll('.card, .strip, .panel').forEach(function (el) {
+    document.querySelectorAll('.card, .strip, .panel, .faq__item').forEach(function (el) {
       var pending = false, px = 0, py = 0;
       el.addEventListener('pointermove', function (e) {
         var rect = el.getBoundingClientRect();
@@ -245,6 +230,34 @@
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) stop();
     else if (heroOnScreen()) start();
+  });
+})();
+
+/* ============================================================
+   FAQ accordion — single-open, ARIA-correct
+   ============================================================ */
+(function initFaq() {
+  'use strict';
+  var items = document.querySelectorAll('.faq__item');
+  if (!items.length) return;
+
+  items.forEach(function (item) {
+    var btn = item.querySelector('.faq__q');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var isOpen = item.hasAttribute('data-open');
+      // Close every item first (single-open accordion)
+      items.forEach(function (other) {
+        other.removeAttribute('data-open');
+        var b = other.querySelector('.faq__q');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
+      // Then open this one, unless it was the one already open
+      if (!isOpen) {
+        item.setAttribute('data-open', '');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
   });
 })();
 
