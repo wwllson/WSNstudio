@@ -40,22 +40,57 @@
     });
   }
 
-  /* --- Contact form: swap for success confirmation -------- */
-  var form = document.getElementById('contactForm');
+  /* --- Contact form: send to the mail API, then swap for confirmation --- */
+  var form = document.getElementById('contact-form');
   var thanks = document.getElementById('thanks');
+  var formError = document.getElementById('formError');
   if (form) {
-    form.addEventListener('submit', function (e) {
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var submitLabel = submitBtn ? submitBtn.textContent : '';
+
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
-      // Native validation (required + type="email") before swapping
+      // Native validation (required + type="email") before submitting
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
       }
-      // TODO: wire to a real endpoint / CRM here.
-      // e.g. fetch('/api/lead', { method: 'POST', body: new FormData(form) })
-      form.setAttribute('hidden', '');
-      thanks.removeAttribute('hidden');
-      thanks.style.animation = 'floatUp .4s ease both';
+      if (formError) formError.setAttribute('hidden', '');
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+
+      var formData = new FormData(form);
+      var payload = {
+        name: formData.get('name'),
+        business: formData.get('business'),
+        email: formData.get('email'),
+        interest: formData.get('interest'),
+        message: formData.get('message')
+      };
+
+      try {
+        var response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        var result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || 'Unable to send your message.');
+        }
+
+        form.reset();
+        form.setAttribute('hidden', '');
+        thanks.removeAttribute('hidden');
+        thanks.style.animation = 'floatUp .4s ease both';
+      } catch (err) {
+        if (formError) {
+          formError.textContent = err.message || 'Sorry, something went wrong sending your message. Please email us directly.';
+          formError.removeAttribute('hidden');
+        }
+      } finally {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = submitLabel; }
+      }
     });
   }
 

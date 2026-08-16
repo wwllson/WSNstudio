@@ -562,7 +562,9 @@ img { max-width: 100%; display: block; }
 .field textarea:focus { border-color: var(--accent); }
 .field textarea { resize: vertical; }
 .field select option { background: #111; }
+.field__error { font-size: 13.5px; line-height: 1.5; color: #ff9b9b; margin-bottom: 14px; }
 .form-card .btn { margin-top: 6px; padding: 15px; font-size: 16px; }
+.form-card .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
 /* Submitted state */
 .thanks { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; padding: 20px 0; }
