@@ -81,7 +81,9 @@ img { max-width: 100%; display: block; }
 /* ============================================================
    Ambient glow
    ============================================================ */
-.page { position: relative; width: 100%; background: var(--bg); }
+/* overflow-x: clip (not hidden) — clips the glow blobs below without turning
+   .page into a scroll container, which would break the sticky nav inside it */
+.page { position: relative; width: 100%; overflow-x: clip; background: var(--bg); }
 .glow {
   position: absolute;
   border-radius: 50%;
