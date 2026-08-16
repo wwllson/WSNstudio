@@ -272,14 +272,14 @@
       </div>
 
       <div class="form-card">
-        <form id="contact-form" novalidate>
+        <form id="contactForm" novalidate>
           <div class="field">
             <label for="f-name">Your name</label>
             <input id="f-name" name="name" type="text" required placeholder="Jane Smith">
           </div>
           <div class="field">
             <label for="f-business">Business name</label>
-            <input id="f-business" name="business" type="text" placeholder="Your business">
+            <input id="f-business" name="business" type="text" required placeholder="Your business">
           </div>
           <div class="field">
             <label for="f-email">Email</label>
@@ -296,9 +296,8 @@
           </div>
           <div class="field">
             <label for="f-notes">Anything else?</label>
-            <textarea id="f-notes" name="message" rows="3" placeholder="A line or two about where you're at"></textarea>
+            <textarea id="f-notes" name="notes" rows="3" placeholder="A line or two about where you're at"></textarea>
           </div>
-          <p class="field__error" id="formError" hidden></p>
           <button type="submit" class="btn btn--solid btn--card">Book a call</button>
         </form>
 
