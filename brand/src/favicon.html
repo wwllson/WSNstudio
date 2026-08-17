@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="font.css">
+<style>
+  html, body { margin: 0; padding: 0; width: 100%; height: 100%; background: transparent; }
+  .icon {
+    position: relative;
+    width: 100vmin; height: 100vmin;
+    border-radius: 22%;
+    overflow: hidden;
+    background: #08080A;
+    display: grid; place-items: center;
+    isolation: isolate;
+    font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+  }
+  .glow {
+    position: absolute; inset: -12%; z-index: 0;
+    background:
+      radial-gradient(52% 46% at 24% 16%, rgba(76, 111, 255, 0.48), transparent 70%),
+      radial-gradient(46% 46% at 84% 92%, rgba(76, 111, 255, 0.20), transparent 72%);
+    filter: blur(6px);
+  }
+  .w {
+    position: relative; z-index: 1;
+    color: #F7F7F8;
+    font-weight: 700;
+    font-size: 64vmin;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    transform: translateY(2%);
+  }
+</style>
+</head>
+<body>
+  <div class="icon">
+    <div class="glow"></div>
+    <div class="w">W</div>
+  </div>
+</body>
+</html>
