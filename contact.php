@@ -11,7 +11,7 @@ $MAIL_PORT      = 465;                        // 465 = implicit SSL/TLS
 $MAIL_USER      = 'contact@wsnstudio.co.uk';  // Hostinger mailbox (SMTP login)
 $MAIL_FROM      = 'contact@wsnstudio.co.uk';  // must match the mailbox above
 $MAIL_FROM_NAME = 'WSN Website';
-$MAIL_TO        = 'contact@wsnstudio.co.uk';  // where enquiries arrive
+$MAIL_TO        = 'William.wsn@outlook.com';  // where enquiries arrive (your inbox)
 
 /* The password is NEVER stored here. It is loaded from a file kept out of
    the repo (mail-secret.php), or from a WSN_MAIL_PASSWORD environment
