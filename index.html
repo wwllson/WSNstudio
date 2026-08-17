@@ -33,7 +33,7 @@
     "url": "https://www.wsnstudio.co.uk/",
     "image": "https://www.wsnstudio.co.uk/social/wsn-og.png",
     "logo": "https://www.wsnstudio.co.uk/logo.png",
-    "email": "hello@wsnstudio.co.uk",
+    "email": "contact@wsnstudio.co.uk",
     "founder": { "@type": "Person", "name": "William" },
     "areaServed": [
       { "@type": "AdministrativeArea", "name": "Staffordshire" },
@@ -273,6 +273,12 @@
 
       <div class="form-card">
         <form id="contactForm" novalidate>
+          <!-- Honeypot: hidden from people, tempting to bots. If filled, we drop it. -->
+          <div class="hp-field" aria-hidden="true">
+            <label>Company URL
+              <input type="text" name="company_url" tabindex="-1" autocomplete="off">
+            </label>
+          </div>
           <div class="field">
             <label for="f-name">Your name</label>
             <input id="f-name" name="name" type="text" required placeholder="Jane Smith">

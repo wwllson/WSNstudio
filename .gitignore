@@ -1,3 +1,10 @@
+# Mailbox password — must NEVER be committed
+mail-secret.php
+
+# Deploy artifacts
+wsn-deploy.zip
+*.zip
+
 # Environment variables
 .env
 .env.local

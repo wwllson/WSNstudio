@@ -40,22 +40,53 @@
     });
   }
 
-  /* --- Contact form: swap for success confirmation -------- */
+  /* --- Contact form: POST to contact.php, then confirm ---- */
   var form = document.getElementById('contactForm');
   var thanks = document.getElementById('thanks');
+
+  function showFormError(msg) {
+    var box = form.querySelector('.form-error');
+    if (!box) {
+      box = document.createElement('p');
+      box.className = 'form-error';
+      box.setAttribute('role', 'alert');
+      form.appendChild(box);
+    }
+    box.textContent = msg;
+  }
+
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      // Native validation (required + type="email") before swapping
+      // Native validation (required + type="email") before sending
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
       }
-      // TODO: wire to a real endpoint / CRM here.
-      // e.g. fetch('/api/lead', { method: 'POST', body: new FormData(form) })
-      form.setAttribute('hidden', '');
-      thanks.removeAttribute('hidden');
-      thanks.style.animation = 'floatUp .4s ease both';
+
+      var btn = form.querySelector('button[type="submit"]');
+      var label = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      var prev = form.querySelector('.form-error');
+      if (prev) prev.remove();
+
+      fetch('contact.php', { method: 'POST', body: new FormData(form) })
+        .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+        .then(function (data) {
+          if (data && data.ok) {
+            form.setAttribute('hidden', '');
+            thanks.removeAttribute('hidden');
+            thanks.style.animation = 'floatUp .4s ease both';
+          } else {
+            showFormError((data && data.error) ||
+              'Sorry, something went wrong. Please email contact@wsnstudio.co.uk.');
+            if (btn) { btn.disabled = false; btn.textContent = label; }
+          }
+        })
+        .catch(function () {
+          showFormError('Network error — please try again, or email contact@wsnstudio.co.uk.');
+          if (btn) { btn.disabled = false; btn.textContent = label; }
+        });
     });
   }
 

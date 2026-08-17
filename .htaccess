@@ -1,0 +1,14 @@
+# WSN — basic production config
+
+# Serve the custom 404 page
+ErrorDocument 404 /404.html
+
+# Never allow the mailbox-password file to be requested over the web
+<Files "mail-secret.php">
+  Require all denied
+</Files>
+
+# (Optional) Force HTTPS — uncomment once your SSL certificate is active
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

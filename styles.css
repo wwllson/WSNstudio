@@ -643,6 +643,20 @@ img { max-width: 100%; display: block; }
   .nav[data-open="true"] .nav__toggle span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 }
 
+/* Honeypot — visually hidden, kept in the accessibility tree off-screen */
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+/* Contact form error message */
+.form-error {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #ffb4a2;
+  background: rgba(255, 120, 90, 0.08);
+  border: 1px solid rgba(255, 120, 90, 0.28);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
 /* ============================================================
    Sticky mobile CTA — prefixed, scoped, no global overrides.
    Hidden on desktop; appears on small screens for thumb reach.
