@@ -273,12 +273,12 @@
 
       <div class="form-card">
         <form id="contactForm" novalidate>
-          <!-- Honeypot: hidden from people, tempting to bots. If filled, we drop it. -->
-          <div class="hp-field" aria-hidden="true">
-            <label>Company URL
-              <input type="text" name="company_url" tabindex="-1" autocomplete="off">
-            </label>
-          </div>
+          <!-- Web3Forms config (access_key is a public client-side key) -->
+          <input type="hidden" name="access_key" value="b5c78484-65d0-44ba-97a6-ac9637cab410">
+          <input type="hidden" name="subject" value="New enquiry from the WSN website">
+          <input type="hidden" name="from_name" value="WSN Website">
+          <!-- Honeypot (Web3Forms native spam check) — hidden from people -->
+          <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="field">
             <label for="f-name">Your name</label>
             <input id="f-name" name="name" type="text" required placeholder="Jane Smith">

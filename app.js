@@ -70,15 +70,19 @@
       var prev = form.querySelector('.form-error');
       if (prev) prev.remove();
 
-      fetch('contact.php', { method: 'POST', body: new FormData(form) })
-        .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      })
+        .then(function (r) { return r.json().catch(function () { return { success: false }; }); })
         .then(function (data) {
-          if (data && data.ok) {
+          if (data && data.success) {
             form.setAttribute('hidden', '');
             thanks.removeAttribute('hidden');
             thanks.style.animation = 'floatUp .4s ease both';
           } else {
-            showFormError((data && data.error) ||
+            showFormError((data && data.message) ||
               'Sorry, something went wrong. Please email contact@wsnstudio.co.uk.');
             if (btn) { btn.disabled = false; btn.textContent = label; }
           }
