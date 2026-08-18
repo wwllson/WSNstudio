@@ -8,7 +8,7 @@ ErrorDocument 404 /404.html
   Require all denied
 </Files>
 
-# (Optional) Force HTTPS — uncomment once your SSL certificate is active
-# RewriteEngine On
-# RewriteCond %{HTTPS} off
-# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# Force HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
