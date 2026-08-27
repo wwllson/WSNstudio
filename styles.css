@@ -415,10 +415,10 @@ img { max-width: 100%; display: block; }
    ============================================================ */
 .ba-figure { margin: 0; }
 .ba {
-  --pos: 50%;
+  --pos: 25%; /* start at 75/25 favouring the After */
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid var(--card-border);
