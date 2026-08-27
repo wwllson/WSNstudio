@@ -413,7 +413,7 @@ img { max-width: 100%; display: block; }
 /* ============================================================
    Before / after comparison slider
    ============================================================ */
-.ba-figure { margin: 0; }
+.ba-figure { margin: 0 auto; max-width: 820px; }
 .ba {
   --pos: 25%; /* start at 75/25 favouring the After */
   position: relative;
@@ -446,6 +446,7 @@ img { max-width: 100%; display: block; }
   background: rgba(0, 0, 0, 0.55); color: #F5F5F5;
   backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   pointer-events: none;
+  transition: opacity .2s ease;
 }
 .ba__tag--before { left: 16px; }
 .ba__tag--after { right: 16px; }

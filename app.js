@@ -303,12 +303,17 @@
   'use strict';
   document.querySelectorAll('[data-ba]').forEach(function (ba) {
     var handle = ba.querySelector('.ba__handle');
+    var beforeTag = ba.querySelector('.ba__tag--before');
+    var afterTag = ba.querySelector('.ba__tag--after');
     var dragging = false;
 
     function setPos(pct) {
       pct = Math.max(0, Math.min(100, pct));
       ba.style.setProperty('--pos', pct + '%');
       if (handle) handle.setAttribute('aria-valuenow', Math.round(pct));
+      // Hide a label once its side is fully wiped away
+      if (beforeTag) beforeTag.style.opacity = pct < 10 ? '0' : '1';
+      if (afterTag) afterTag.style.opacity = pct > 90 ? '0' : '1';
     }
     function posFromEvent(e) {
       var rect = ba.getBoundingClientRect();
@@ -340,6 +345,9 @@
         else if (e.key === 'End') { setPos(100); e.preventDefault(); }
       });
     }
+
+    // Apply the CSS default position on load (sets labels + aria)
+    setPos(parseFloat(getComputedStyle(ba).getPropertyValue('--pos')) || 50);
   });
 })();
 
