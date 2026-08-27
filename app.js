@@ -296,3 +296,50 @@
   });
 })();
 
+/* ============================================================
+   Before / after comparison slider — pointer drag + keyboard
+   ============================================================ */
+(function initBeforeAfter() {
+  'use strict';
+  document.querySelectorAll('[data-ba]').forEach(function (ba) {
+    var handle = ba.querySelector('.ba__handle');
+    var dragging = false;
+
+    function setPos(pct) {
+      pct = Math.max(0, Math.min(100, pct));
+      ba.style.setProperty('--pos', pct + '%');
+      if (handle) handle.setAttribute('aria-valuenow', Math.round(pct));
+    }
+    function posFromEvent(e) {
+      var rect = ba.getBoundingClientRect();
+      return ((e.clientX - rect.left) / rect.width) * 100;
+    }
+
+    ba.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      try { ba.setPointerCapture(e.pointerId); } catch (_e) {}
+      setPos(posFromEvent(e));
+    });
+    ba.addEventListener('pointermove', function (e) {
+      if (dragging) setPos(posFromEvent(e));
+    });
+    function endDrag(e) {
+      dragging = false;
+      try { ba.releasePointerCapture(e.pointerId); } catch (_e) {}
+    }
+    ba.addEventListener('pointerup', endDrag);
+    ba.addEventListener('pointercancel', endDrag);
+
+    if (handle) {
+      handle.addEventListener('keydown', function (e) {
+        var cur = parseFloat(ba.style.getPropertyValue('--pos')) || 50;
+        var step = e.shiftKey ? 10 : 2;
+        if (e.key === 'ArrowLeft') { setPos(cur - step); e.preventDefault(); }
+        else if (e.key === 'ArrowRight') { setPos(cur + step); e.preventDefault(); }
+        else if (e.key === 'Home') { setPos(0); e.preventDefault(); }
+        else if (e.key === 'End') { setPos(100); e.preventDefault(); }
+      });
+    }
+  });
+})();
+
