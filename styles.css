@@ -527,6 +527,13 @@ img { max-width: 100%; display: block; }
   color: rgba(245, 245, 245, 0.4);
   margin-top: 5px;
 }
+.price-note {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(245, 245, 245, 0.45);
+}
 .features { display: flex; flex-direction: column; margin-top: 24px; margin-bottom: 26px; }
 .features .row {
   padding: 13px 0;
