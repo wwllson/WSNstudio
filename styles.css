@@ -504,21 +504,28 @@ img { max-width: 100%; display: block; }
 
 /* Tier cards with feature rows */
 .tier__desc { font-size: 15px; line-height: 1.55; color: rgba(245, 245, 245, 0.6); margin-top: 8px; }
-.tier__price {
+.tier__price { margin-top: 14px; }
+.tier__gbp {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  margin-top: 14px;
   font-family: var(--font-display);
   font-size: 14px;
   color: rgba(245, 245, 245, 0.5);
 }
-.tier__price strong {
+.tier__gbp strong {
   font-weight: 600;
   font-size: 32px;
   line-height: 1;
   letter-spacing: -0.02em;
   color: var(--text);
+}
+.tier__usd {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(245, 245, 245, 0.4);
+  margin-top: 5px;
 }
 .features { display: flex; flex-direction: column; margin-top: 24px; margin-bottom: 26px; }
 .features .row {
