@@ -286,11 +286,15 @@
         other.removeAttribute('data-open');
         var b = other.querySelector('.faq__q');
         if (b) b.setAttribute('aria-expanded', 'false');
+        var oa = other.querySelector('.faq__a');
+        if (oa) oa.style.maxHeight = null;
       });
       // Then open this one, unless it was the one already open
       if (!isOpen) {
         item.setAttribute('data-open', '');
         btn.setAttribute('aria-expanded', 'true');
+        var a = item.querySelector('.faq__a');
+        if (a) a.style.maxHeight = a.scrollHeight + 'px'; // expand to fit any length
       }
     });
   });

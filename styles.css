@@ -401,7 +401,7 @@ img { max-width: 100%; display: block; }
   line-height: 1.6;
   color: rgba(245, 245, 245, 0.64);
 }
-.faq__item[data-open] .faq__a { max-height: 340px; }
+/* open height is set to the answer's real height by JS (see app.js) */
 .faq__item[data-open] .faq__plus { transform: rotate(45deg); }
 .faq__item[data-open] .faq__icon { border-color: var(--accent-border); background: var(--accent-tint); }
 @media (max-width: 560px) {
