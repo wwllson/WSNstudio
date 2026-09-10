@@ -83,12 +83,12 @@
             thanks.style.animation = 'floatUp .4s ease both';
           } else {
             showFormError((data && data.message) ||
-              'Sorry, something went wrong. Please email contact@wsnstudio.co.uk.');
+              'Sorry, something went wrong. Please email projects@wsnstudio.co.uk.');
             if (btn) { btn.disabled = false; btn.textContent = label; }
           }
         })
         .catch(function () {
-          showFormError('Network error — please try again, or email contact@wsnstudio.co.uk.');
+          showFormError('Network error — please try again, or email projects@wsnstudio.co.uk.');
           if (btn) { btn.disabled = false; btn.textContent = label; }
         });
     });
